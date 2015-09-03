@@ -1,9 +1,16 @@
 package com.steveandconnie.projects.resistance;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateGame extends AppCompatActivity {
 
@@ -11,6 +18,27 @@ public class CreateGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
+    }
+
+    public void onClickStartBtn(View view) {
+        //start game logic
+        EditText gameNameText = (EditText)findViewById(R.id.gameName);
+        String gameName = gameNameText.getText().toString();
+
+        ViewGroup playerGroup = (ViewGroup)findViewById(R.id.playerNamesGroup);
+        List<String> playerNames = new ArrayList<String>();
+        for(int i = 0; i < playerGroup.getChildCount(); i++ ) {
+            EditText playerText = (EditText)playerGroup.getChildAt(i);
+            playerNames.add(playerText.getText().toString());
+        }
+        startGame(gameName, playerNames);
+        //pass to screen 2
+    }
+
+    private void startGame(String gameName, List<String> playerNames) {
+        TextView testOutput = (TextView)findViewById(R.id.testOutput);
+
+        testOutput.setText("Game name: " + gameName + " Player names: " + playerNames);
     }
 
     @Override
