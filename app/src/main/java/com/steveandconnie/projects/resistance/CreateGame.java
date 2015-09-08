@@ -1,6 +1,9 @@
 package com.steveandconnie.projects.resistance;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,8 +20,8 @@ import java.util.List;
 
 public class CreateGame extends AppCompatActivity {
 
-    static final int MIN_NUM_PLAYERS = 5;
-    static final int MAX_NUM_PLAYERS = 10;
+    public static final int MIN_NUM_PLAYERS = 5;
+    public static final int MAX_NUM_PLAYERS = 10;
 
     private static int numPlayers = 0;
 
@@ -30,8 +33,7 @@ public class CreateGame extends AppCompatActivity {
         // dynamically create min new players
         final LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
         for (int i = 0; i < MIN_NUM_PLAYERS; i++) {
-//            LinearLayout playerItem = createPlayerItem();
-            PlayerItem item = new PlayerItem(this, "Player "+(numPlayers+1));
+            PlayerItem item = new PlayerItem(this);
             // add player item to overall players list
             playerNamesGroup.addView(item);
         }
@@ -47,7 +49,7 @@ public class CreateGame extends AppCompatActivity {
 
     public void onClickAddPlayerBtn(View view) {
         // add a player
-        PlayerItem item = new PlayerItem(this, "Player "+(numPlayers+1));
+        PlayerItem item = new PlayerItem(this);
 
         // add player item to overall players list
         final LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
@@ -72,7 +74,26 @@ public class CreateGame extends AppCompatActivity {
         //pass to screen 2
     }
 
+
+
     private void startGame(String gameName, List<String> playerNames) {
+        if (numPlayers < MIN_NUM_PLAYERS || numPlayers > MAX_NUM_PLAYERS) {
+            String title = this.getString(R.string.alert_title);
+            String message = this.getString(R.string.num_player_alert_message, MIN_NUM_PLAYERS, MAX_NUM_PLAYERS);
+            String positiveBtnMessage = this.getString(R.string.alert_okay);
+            GameUtils.displayAlertMessage(this, title, message, positiveBtnMessage);
+        } else if (!GameUtils.checkStringListValid(playerNames)) {
+            String title = this.getString(R.string.alert_title);
+            String message = this.getString(R.string.player_name_alert_message);
+            String positiveBtnMessage = this.getString(R.string.alert_okay);
+            GameUtils.displayAlertMessage(this, title, message, positiveBtnMessage);
+        } else {
+            Intent revealRolesIntent = new Intent(CreateGame.this, RevealRoles.class);
+            //revealRolesIntent.putExtra("key", value); //optional parameters
+            CreateGame.this.startActivity(revealRolesIntent);
+        }
+
+
         // update text view for visual feedback
         TextView testOutput = (TextView)findViewById(R.id.testOutput);
         testOutput.setText("Game name: " + gameName + "\nPlayer names: " + playerNames);

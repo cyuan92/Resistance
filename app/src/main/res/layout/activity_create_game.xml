@@ -17,23 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Step 1: Create Game"
-            android:id="@+id/screenTitle"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Game name"
             android:id="@+id/gameNameLabel" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gameName"
-            android:text="My game" />
+            android:hint="@string/game_name_hint"
+            android:id="@+id/gameName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,118 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/playerNamesGroup" >
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7">-->
-
-                <!--<EditText-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.7"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/playerName"-->
-                    <!--android:text="Player 1" />-->
-
-                <!--<Button-->
-                    <!--style="?android:attr/buttonStyleSmall"-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Remove"-->
-                    <!--android:id="@+id/button2" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7" >-->
-
-                <!--<EditText-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.7"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/editText5"-->
-                    <!--android:text="Player 2" />-->
-
-                <!--<Button-->
-                    <!--style="?android:attr/buttonStyleSmall"-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Remove"-->
-                    <!--android:id="@+id/button" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7" >-->
-
-                <!--<EditText-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.7"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/editText6"-->
-                    <!--android:text="Player 3" />-->
-
-                <!--<Button-->
-                    <!--style="?android:attr/buttonStyleSmall"-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Remove"-->
-                    <!--android:id="@+id/button3" />-->
-
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7" >-->
-
-                <!--<EditText-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.7"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/editText7"-->
-                    <!--android:text="Player 4" />-->
-
-                <!--<Button-->
-                    <!--style="?android:attr/buttonStyleSmall"-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Remove"-->
-                    <!--android:id="@+id/button4" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.7" >-->
-
-                <!--<EditText-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.7"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/editText"-->
-                    <!--android:text="Player 5" />-->
-
-                <!--<Button-->
-                    <!--style="?android:attr/buttonStyleSmall"-->
-                    <!--android:layout_width="0dip"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Remove"-->
-                    <!--android:id="@+id/button5" />-->
-            <!--</LinearLayout>-->
-
         </LinearLayout>
 
         <Button

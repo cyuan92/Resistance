@@ -11,26 +11,30 @@ import android.widget.LinearLayout;
  */
 public class PlayerItem extends LinearLayout {
 
-    private String playerName;
+    private String playerName = null;
+    private EditText playerNameEditText;
 
-    protected PlayerItem(Context context, String playerName) {
+    public PlayerItem(Context context) {
         super(context);
         this.setOrientation(LinearLayout.HORIZONTAL);
 
-        // create player name field
-        this.playerName = playerName;
-        final EditText playerNameEditText = new EditText(context);
-        playerNameEditText.setText(playerName);
+        this.playerNameEditText = new EditText(context);
+
+        // add player hint to each input
+        String playerHint = context.getString(R.string.player_hint);
+        this.playerNameEditText.setHint(playerHint);
+
         // give the edit text a width_weight
         LinearLayout.LayoutParams playerParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 0.7f);
-        playerNameEditText.setLayoutParams(playerParams);
+        this.playerNameEditText.setLayoutParams(playerParams);
 
         // create remove button for player
         final Button removePlayerBtn = new Button(context);
-        removePlayerBtn.setText("Remove");
+        String removeBtnName = context.getString(R.string.remove_btn_name);
+        removePlayerBtn.setText(removeBtnName);
         removePlayerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,15 +48,19 @@ public class PlayerItem extends LinearLayout {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 0.3f);
-        playerNameEditText.setLayoutParams(btnParams);
+        this.playerNameEditText.setLayoutParams(btnParams);
 
         // add player name and remove button to player item
-        this.addView(playerNameEditText);
+        this.addView(this.playerNameEditText);
         this.addView(removePlayerBtn);
+
         CreateGame.incrementNumPlayers();
     }
 
     public String getPlayerName() {
+        if (this.playerName == null || this.playerName.isEmpty()) {
+            this.playerName = this.playerNameEditText.getText().toString();
+        }
         return this.playerName;
     }
 }
