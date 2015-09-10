@@ -1,9 +1,13 @@
 package com.steveandconnie.projects.resistance;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class RevealRoles extends AppCompatActivity {
 
@@ -11,8 +15,14 @@ public class RevealRoles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reveal_roles);
-//        Intent intent = getIntent();
-//        String value = intent.getStringExtra("key")
+        Intent intent = getIntent();
+        ArrayList<Player> playerList = intent.getParcelableArrayListExtra("playerList");
+        TextView text = (TextView) findViewById(R.id.textView2);
+        String poopy = "";
+        for (Player player : playerList) {
+            poopy += player.toString();
+        }
+        text.setText(poopy);
     }
 
     @Override
