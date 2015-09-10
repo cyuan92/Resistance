@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -17,23 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Step 1: Create Game"
-            android:id="@+id/screenTitle"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Game name"
             android:id="@+id/gameNameLabel" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gameName"
-            android:text="My game" />
+            android:hint="@string/game_name_hint"
+            android:id="@+id/gameName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,14 +37,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.17"
+            android:layout_weight="1"
             android:id="@+id/playerNamesGroup" >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/playerName"
-                android:text="Player 1" />
         </LinearLayout>
 
         <Button
@@ -61,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Add Player"
             android:id="@+id/addPlayerBtn"
+            android:onClick="onClickAddPlayerBtn"
             android:layout_gravity="center_horizontal" />
 
         <Button
@@ -80,4 +66,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
