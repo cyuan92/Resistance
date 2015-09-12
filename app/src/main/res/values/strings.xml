@@ -1,20 +1,25 @@
 <resources>
     <string name="app_name">Resistance</string>
-    <string name="game_name_hint">Game name</string>
-    <string name="player_hint">Player</string>
-    <string name="remove_btn_name">Remove</string>
-
-    <string name="num_player_alert_message">You must have %1$d-%2$d players to begin\n</string>
-    <string name="player_name_alert_message">Please name all players\n</string>
-
-    <string name="alert_title">Uh oh!</string>
-    <string name="alert_okay">Got it</string>
-
-    <string name="action_settings">Settings</string>
 
     <string name="step_one_activity_title">Step 1: Create a game</string>
     <string name="step_two_activity_title">Step 2: Reveal roles</string>
 
+    <!-- screen 1-->
+    <string name="game_name_hint">Game name</string>
+    <string name="player_hint">Player</string>
+    <string name="remove_btn_name">Remove</string>
+
+    <!-- screen 2 -->
+    <string name="reveal_role_instructions">Click on your name to see your role</string>
+
+    <!-- alert dialogs -->
+    <string name="num_player_alert_message">You must have %1$d-%2$d players to begin\n</string>
+    <string name="player_name_alert_message">Please name all players\n</string>
+    <string name="alert_title">Uh oh!</string>
+    <string name="alert_okay">Got it</string>
+
+
     <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

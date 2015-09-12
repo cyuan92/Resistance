@@ -5,24 +5,44 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RevealRoles extends AppCompatActivity {
+
+    private List<Player> playerList;
+    private final int NUM_BTNS_PER_ROW = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reveal_roles);
         Intent intent = getIntent();
-        ArrayList<Player> playerList = intent.getParcelableArrayListExtra("playerList");
-        TextView text = (TextView) findViewById(R.id.textView2);
-        String poopy = "";
-        for (Player player : playerList) {
-            poopy += player.toString();
-        }
-        text.setText(poopy);
+        playerList = intent.getParcelableArrayListExtra("playerList");
+        createPlayerRoleBtns();
+    }
+
+    private void createPlayerRoleBtns() {
+        // shuffle to make sure identity not guessable
+        Collections.shuffle(playerList);
+
+        // create a grid view with player role toggle buttons
+        GridView grid = (GridView) findViewById(R.id.playerRoleBtnGroup);
+        grid.setNumColumns(NUM_BTNS_PER_ROW);
+        grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        grid.setAdapter(new ButtonAdapter(this, playerList));
     }
 
     @Override
