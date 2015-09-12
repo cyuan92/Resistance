@@ -3,6 +3,7 @@ package com.steveandconnie.projects.resistance;
 import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.support.test.InstrumentationRegistry;
+import android.widget.LinearLayout;
 
 import org.junit.Before;
 
@@ -33,10 +34,11 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<CreateGame> {
         onView(withId(R.id.gameName)).perform(typeText("yoyo"), closeSoftKeyboard());
 
         // grab all player edit texts and enter names
-//        onView(withParent(R.id.playerNamesGroup))
+//        LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
+        onView(withParent(withId(R.id.playerNamesGroup))).perform(typeText("lala"));
 
         // add a player
-        onView(withId(R.id.addPlayerBtn)).perform(scrollTo(), click());
+        onView(withId(R.id.startGameBtn)).perform(scrollTo(), click());
 
         // wait in order to give visual feedback
         SystemClock.sleep(2000);
