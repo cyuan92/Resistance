@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.GridView;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class RevealRoles extends AppCompatActivity {
 
-    private List<Player> playerList;
+    private ArrayList<Player> playerList;
     private final int NUM_BTNS_PER_ROW = 3;
 
     @Override
@@ -43,6 +44,16 @@ public class RevealRoles extends AppCompatActivity {
         grid.setNumColumns(NUM_BTNS_PER_ROW);
         grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
         grid.setAdapter(new ButtonAdapter(this, playerList));
+    }
+
+    public void onClickStartMissionsBtn(View view) {
+        // start screen 3 intent
+        Intent currentMissionIntent = new Intent(RevealRoles.this, CurrentMission.class);
+
+        // pass Resistance object to next activity
+        Resistance resistanceGame = new Resistance(1, new boolean[5]);
+        currentMissionIntent.putExtra("resistanceGame", resistanceGame);
+        RevealRoles.this.startActivity(currentMissionIntent);
     }
 
     @Override
