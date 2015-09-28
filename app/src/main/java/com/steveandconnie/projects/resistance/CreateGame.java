@@ -75,6 +75,11 @@ public class CreateGame extends AppCompatActivity {
         for(int i = 0; i < playerGroup.getChildCount(); i++ ) {
             // children in id.playerNamesGroup are PlayerItems (linear layouts)
             PlayerItem player = (PlayerItem)playerGroup.getChildAt(i);
+
+            // FOR TESTING
+            EditText playerName = (EditText) player.getChildAt(0);
+            playerName.setText("Player"+i);
+
             playerNames.add(player.getPlayerName());
         }
 

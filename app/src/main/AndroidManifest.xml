@@ -21,6 +21,10 @@
             android:name=".RevealRoles"
             android:label="@string/step_two_activity_title" >
         </activity>
+        <activity
+            android:name=".CurrentMission"
+            android:label="@string/step_three_activity_title" >
+        </activity>
     </application>
 
 </manifest>
