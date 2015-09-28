@@ -1,19 +1,17 @@
 package com.steveandconnie.projects.resistance;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CurrentMission extends AppCompatActivity {
 
@@ -47,7 +45,7 @@ public class CurrentMission extends AppCompatActivity {
         grid.setAdapter(new PlayerSelectButtonAdapter(this, playerList));
     }
 
-    public void onClickVoteMissionsBtn() {
+    public void onClickVoteMissionsBtn(View view) {
         ViewGroup playerGroup = (ViewGroup)findViewById(R.id.playerBtnGroup);
         ArrayList<String> selectedPlayers = new ArrayList<String>();
         for(int i = 0; i < playerGroup.getChildCount(); i++ ) {

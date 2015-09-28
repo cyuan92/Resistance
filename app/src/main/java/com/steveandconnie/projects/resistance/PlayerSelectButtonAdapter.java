@@ -44,6 +44,8 @@ public class PlayerSelectButtonAdapter extends BaseAdapter {
             Player player = playerList.get(position);
             playerRoleBtn = new ToggleButton(context);
             playerRoleBtn.setText(player.getPlayerName());
+            playerRoleBtn.setTextOn(player.getPlayerName());
+            playerRoleBtn.setTextOff(player.getPlayerName());
 
             // size the toggle button
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
