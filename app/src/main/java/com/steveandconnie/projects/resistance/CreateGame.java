@@ -21,17 +21,6 @@ public class CreateGame extends AppCompatActivity {
     public static final int MAX_NUM_PLAYERS = 10;
     private static int numPlayers = 0;
 
-    private static final SparseIntArray numPlayersToNumSpies;
-    static {
-        numPlayersToNumSpies = new SparseIntArray();
-        numPlayersToNumSpies.put(5, 2);
-        numPlayersToNumSpies.put(6, 2);
-        numPlayersToNumSpies.put(7, 3);
-        numPlayersToNumSpies.put(8, 3);
-        numPlayersToNumSpies.put(9, 3);
-        numPlayersToNumSpies.put(10, 4);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +104,7 @@ public class CreateGame extends AppCompatActivity {
 
     private ArrayList<Player> assignRoles(List<String> playerNames) {
         // determine number of spies in game
-        int numSpies = numPlayersToNumSpies.get(numPlayers);
+        int numSpies = GameLogic.NUM_PLAYERS_TO_SPIES.get(numPlayers);
 
         // create Players and store them in a list
         Collections.shuffle(playerNames);

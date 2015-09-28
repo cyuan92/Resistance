@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by connieyuan on 9/12/15.
  */
-public class ButtonAdapter extends BaseAdapter {
+public class PlayerRoleButtonAdapter extends BaseAdapter {
 
     private Context context;
     private List<Player> playerList;
 
-    public ButtonAdapter(Context context, List<Player> playerList) {
+    public PlayerRoleButtonAdapter(Context context, List<Player> playerList) {
         this.context = context;
         this.playerList = playerList;
     }
