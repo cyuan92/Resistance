@@ -1,5 +1,7 @@
 package com.steveandconnie.projects.resistance;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,13 @@ public class CurrentMission extends AppCompatActivity {
         currentMissionInstructions.setText(this.getString(R.string.current_mission_instructions, numPlayersToSelect));
 
         createPlayerBtns();
+
+        // add mission history fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MissionHistoryFragment fragment = new MissionHistoryFragment();
+        fragmentTransaction.add(R.id.missionHistoryFragmentContainer, fragment);
+        fragmentTransaction.commit();
     }
 
     private void createPlayerBtns() {

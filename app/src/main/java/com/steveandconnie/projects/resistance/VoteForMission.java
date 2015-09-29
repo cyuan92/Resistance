@@ -1,5 +1,7 @@
 package com.steveandconnie.projects.resistance;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,13 @@ public class VoteForMission extends AppCompatActivity {
         TextView someText = (TextView) findViewById(R.id.someText);
         someText.setText(selectedPlayers.toString());
         Log.d("selectedPlayers", selectedPlayers.toString());
+
+        // add mission history fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MissionHistoryFragment fragment = new MissionHistoryFragment();
+        fragmentTransaction.add(R.id.missionHistoryFragmentContainer, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
