@@ -14,12 +14,17 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CurrentMission extends AppCompatActivity {
 
     private ArrayList<Player> playerList;
+    private ArrayList<Player> selectedPlayerList;
+    private HashMap<String, Player> nameToPlayerMap;
+
     private Resistance resistanceGame;
     private final int NUM_BTNS_PER_ROW = 3;
+    int numPlayersToSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +35,13 @@ public class CurrentMission extends AppCompatActivity {
         Intent intent = getIntent();
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
         playerList = intent.getParcelableArrayListExtra("playerList");
+        nameToPlayerMap = new HashMap<String, Player>();
+        for(Player player : playerList) {
+            nameToPlayerMap.put(player.getPlayerName(), player);
+        }
 
         // Display text instructions for how many players to select on this mission
-        int numPlayersToSelect = GameLogic.getNumPlayersToSelect(resistanceGame.getCurrentMissionNum(), playerList.size());
+        numPlayersToSelect = GameLogic.getNumPlayersToSelect(resistanceGame.getCurrentMissionNum(), playerList.size());
         TextView currentMissionInstructions = (TextView) findViewById(R.id.currentMissionInstructions);
         currentMissionInstructions.setText(this.getString(R.string.current_mission_instructions, numPlayersToSelect));
 
@@ -51,32 +60,36 @@ public class CurrentMission extends AppCompatActivity {
         GridView grid = (GridView) findViewById(R.id.playerBtnGroup);
         grid.setNumColumns(NUM_BTNS_PER_ROW);
         grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-        grid.setAdapter(new PlayerSelectButtonAdapter(this, playerList));
+        grid.setAdapter(new PlayerSelectButtonAdapter(this, playerList, null));
     }
 
     public void onClickVoteMissionsBtn(View view) {
+        // create a new list of the selected players
         ViewGroup playerGroup = (ViewGroup)findViewById(R.id.playerBtnGroup);
-        ArrayList<String> selectedPlayers = new ArrayList<String>();
+        selectedPlayerList = new ArrayList<Player>();
         for(int i = 0; i < playerGroup.getChildCount(); i++ ) {
             // children in id.playerBtnGroup are toggle buttons
-            ToggleButton player = (ToggleButton)playerGroup.getChildAt(i);
+            ToggleButton playerBtn = (ToggleButton)playerGroup.getChildAt(i);
 
-            if (player.isChecked()) {
-                selectedPlayers.add(player.getText().toString());
+            if (playerBtn.isChecked()) {
+                String playerName = playerBtn.getText().toString();
+                Player player = nameToPlayerMap.get(playerName);
+                selectedPlayerList.add(player);
             }
         }
 
-        if (GameLogic.checkNumPlayersSelected(selectedPlayers.size(), resistanceGame.getCurrentMissionNum(), playerList.size())) {
+        if (GameLogic.checkNumPlayersSelected(selectedPlayerList.size(), resistanceGame.getCurrentMissionNum(), playerList.size())) {
+
             // go vote
-            Intent voteForMissionIntent = new Intent(CurrentMission.this, VoteForMission.class);
+            Intent voteForMissionIntent = new Intent(CurrentMission.this, LaunchMission.class);
             voteForMissionIntent.putExtra("resistanceGame", resistanceGame);
             voteForMissionIntent.putParcelableArrayListExtra("playerList", playerList);
-            voteForMissionIntent.putStringArrayListExtra("selectedPlayers", selectedPlayers); //eventually will pass player objects
+            voteForMissionIntent.putParcelableArrayListExtra("selectedPlayerList", selectedPlayerList);
             CurrentMission.this.startActivity(voteForMissionIntent);
         } else {
             // display error message and try again
             String title = this.getString(R.string.alert_title);
-            String message = this.getString(R.string.num_players_selected_alert_message);
+            String message = this.getString(R.string.num_players_selected_alert_message, numPlayersToSelect);
             String positiveBtnMessage = this.getString(R.string.alert_okay);
             GameUtils.displayAlertMessage(this, title, message, positiveBtnMessage);
         }

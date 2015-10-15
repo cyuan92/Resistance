@@ -3,12 +3,11 @@ package com.steveandconnie.projects.resistance;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Arrays;
-
 /**
  * Created by connieyuan on 9/26/15.
  */
 public class Resistance implements Parcelable {
+
     private int currentMissionNum;
     private boolean[] missionHistory;
 
