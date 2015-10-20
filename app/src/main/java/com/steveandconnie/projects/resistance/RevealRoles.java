@@ -41,7 +41,7 @@ public class RevealRoles extends AppCompatActivity {
         Intent currentMissionIntent = new Intent(RevealRoles.this, CurrentMission.class);
 
         // pass Resistance object to next activity
-        Resistance resistanceGame = new Resistance(1, new boolean[5]);
+        Resistance resistanceGame = new Resistance(4, new boolean[5], playerList);
         currentMissionIntent.putExtra("resistanceGame", resistanceGame);
         currentMissionIntent.putParcelableArrayListExtra("playerList", playerList);
         RevealRoles.this.startActivity(currentMissionIntent);

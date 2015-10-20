@@ -5,7 +5,7 @@ import android.util.SparseIntArray;
 /**
  * Created by connieyuan on 9/27/15.
  */
-public class GameLogic {
+public class GameRules {
     public static final SparseIntArray NUM_PLAYERS_TO_SPIES;
 
     public static final SparseIntArray MISSION_ONE;

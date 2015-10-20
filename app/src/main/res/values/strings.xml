@@ -25,6 +25,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_current_mission">CurrentMission</string>
     <string name="current_mission_instructions">Select %1$d players to go on this mission</string>
+    <string name="fourth_mission_instructions">. %1$d fail votes are needed to fail this mission</string>
     <string name="num_players_selected_alert_message">Only %1$d players allowed on this mission!\n</string>
     <string name="vote_missions">Vote for this Mission</string>
     <string name="title_activity_vote_for_mission">VoteForMission</string>

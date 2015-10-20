@@ -36,12 +36,22 @@ public class LaunchMission extends AppCompatActivity {
         // Get objects passed from previous activity
         Intent intent = getIntent();
         Resistance resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
-        playerList = intent.getParcelableArrayListExtra("playerList");
+//        playerList = resistanceGame.getPlayerList();
         selectedPlayerList = intent.getParcelableArrayListExtra("selectedPlayerList");
 
         // display voting instructions
         TextView votingInstructions = (TextView) findViewById(R.id.votingInstructions);
-        String message = this.getString(R.string.vote_for_mission_instructions);
+        boolean isFourthMission = resistanceGame.getCurrentMissionNum() == 4;
+        int numPlayersToFail = GameRules.MISSION_FOUR_FAILS_NEEDED.get(resistanceGame.getNumPlayers());
+
+        String playerVoteInstructions = this.getString(R.string.vote_for_mission_instructions);
+        String message = playerVoteInstructions;
+
+        if (isFourthMission && numPlayersToFail > 1) {
+            String fourthMissionMessage = this.getString(R.string.fourth_mission_instructions, numPlayersToFail);
+            message += fourthMissionMessage;
+        }
+
         votingInstructions.setText(message);
 
         // create player buttons

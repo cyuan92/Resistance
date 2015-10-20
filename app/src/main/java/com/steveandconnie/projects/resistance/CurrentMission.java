@@ -41,10 +41,20 @@ public class CurrentMission extends AppCompatActivity {
         }
 
         // Display text instructions for how many players to select on this mission
-        numPlayersToSelect = GameLogic.getNumPlayersToSelect(resistanceGame.getCurrentMissionNum(), playerList.size());
+        int numPlayers = resistanceGame.getNumPlayers();
+        numPlayersToSelect = GameRules.getNumPlayersToSelect(resistanceGame.getCurrentMissionNum(), numPlayers);
+        boolean isFourthMission = resistanceGame.getCurrentMissionNum() == 4;
+        int numPlayersToFail = GameRules.MISSION_FOUR_FAILS_NEEDED.get(numPlayers);
         TextView currentMissionInstructions = (TextView) findViewById(R.id.currentMissionInstructions);
-        currentMissionInstructions.setText(this.getString(R.string.current_mission_instructions, numPlayersToSelect));
+        String playerSelectInstructions = this.getString(R.string.current_mission_instructions, numPlayersToSelect);
+        String message = playerSelectInstructions;
 
+        if (isFourthMission && numPlayersToFail > 1) {
+            String playerFailInstructions = this.getString(R.string.fourth_mission_instructions, numPlayersToFail);
+            message += playerFailInstructions;
+        }
+
+        currentMissionInstructions.setText(message);
         createPlayerBtns();
 
         // add mission history fragment
@@ -78,7 +88,7 @@ public class CurrentMission extends AppCompatActivity {
             }
         }
 
-        if (GameLogic.checkNumPlayersSelected(selectedPlayerList.size(), resistanceGame.getCurrentMissionNum(), playerList.size())) {
+        if (GameRules.checkNumPlayersSelected(selectedPlayerList.size(), resistanceGame.getCurrentMissionNum(), playerList.size())) {
 
             // go vote
             Intent voteForMissionIntent = new Intent(CurrentMission.this, LaunchMission.class);
