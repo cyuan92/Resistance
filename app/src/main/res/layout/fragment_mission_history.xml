@@ -17,76 +17,198 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="@string/mission_history_fragment_title" />
 
-        <RadioGroup
+        <!-- mission 1-->
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal">
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="New Button"-->
-                <!--android:background="@drawable/rounded_button"-->
-                <!--android:id="@+id/button" />-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp">
 
-            <RadioButton
-                android:text="1"
-                android:button="@null"
-                android:drawableBottom="@android:drawable/btn_radio"
-                android:gravity="center"
-                android:id="@+id/radioButton"
-                android:enabled="false"
-                android:textColor="@color/purple"
-                android:checked="true"
-                android:buttonTint="@color/purple"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mission1Text"
+                    android:text="1"
+                    android:layout_centerHorizontal="true" />
 
-            <RadioButton
-                android:text="2"
-                android:button="@null"
-                android:drawableBottom="@android:drawable/btn_radio"
-                android:gravity="center"
-                android:id="@+id/radioButton2"
-                android:enabled="false"
-                android:textColor="#000000"
-            />
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/mission1Text"
+                    android:background="@drawable/round_button"
+                    android:id="@+id/mission1Btn" />
 
-            <RadioButton
-                android:text="3"
-                android:button="@null"
-                android:drawableBottom="@android:drawable/btn_radio"
-                android:gravity="center"
-                android:id="@+id/radioButton3"
-                android:enabled="false"
-                android:textColor="#000000"
-            />
+            </RelativeLayout>
 
-            <RadioButton
-                android:text="4"
-                android:button="@null"
-                android:drawableBottom="@android:drawable/btn_radio"
-                android:gravity="center"
-                android:id="@+id/radioButton4"
-                android:enabled="false"
-                android:textColor="#000000"
-            />
+            <!-- mission 2 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp">
 
-            <RadioButton
-                android:text="5"
-                android:button="@null"
-                android:drawableBottom="@android:drawable/btn_radio"
-                android:gravity="center"
-                android:id="@+id/radioButton5"
-                android:enabled="false"
-                android:textColor="#000000"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mission2Text"
+                    android:text="2"
+                    android:layout_centerHorizontal="true" />
 
-        </RadioGroup>
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/mission2Text"
+                    android:background="@drawable/round_button"
+                    android:id="@+id/mission2Btn" />
+
+            </RelativeLayout>
+
+            <!-- mission 3 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mission3Text"
+                    android:text="3"
+                    android:layout_centerHorizontal="true" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/mission3Text"
+                    android:background="@drawable/round_button"
+                    android:id="@+id/mission3Btn" />
+
+            </RelativeLayout>
+
+            <!-- mission 4 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mission4Text"
+                    android:text="4"
+                    android:layout_centerHorizontal="true" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/mission4Text"
+                    android:background="@drawable/round_button"
+                    android:id="@+id/mission4Btn" />
+
+            </RelativeLayout>
+
+            <!-- mission 5 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mission5Text"
+                    android:text="5"
+                    android:layout_centerHorizontal="true" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/mission5Text"
+                    android:background="@drawable/round_button"
+                    android:id="@+id/mission5Btn" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!--<RadioGroup-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center_horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:text="1"-->
+                <!--android:button="@null"-->
+                <!--android:drawableBottom="@android:drawable/btn_radio"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/mission1RadioBtn"-->
+                <!--android:enabled="false"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:checked="true"-->
+                <!--android:buttonTint="@color/purple"-->
+            <!--/>-->
+
+            <!--<RadioButton-->
+                <!--android:text="2"-->
+                <!--android:button="@null"-->
+                <!--android:drawableBottom="@android:drawable/btn_radio"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/mission2RadioBtn"-->
+                <!--android:enabled="false"-->
+                <!--android:textColor="#000000"-->
+            <!--/>-->
+
+            <!--<RadioButton-->
+                <!--android:text="3"-->
+                <!--android:button="@null"-->
+                <!--android:drawableBottom="@android:drawable/btn_radio"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/mission3RadioBtn"-->
+                <!--android:enabled="false"-->
+                <!--android:textColor="#000000"-->
+            <!--/>-->
+
+            <!--<RadioButton-->
+                <!--android:text="4"-->
+                <!--android:button="@null"-->
+                <!--android:drawableBottom="@android:drawable/btn_radio"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/mission4RadioBtn"-->
+                <!--android:enabled="false"-->
+                <!--android:textColor="#000000"-->
+            <!--/>-->
+
+            <!--<RadioButton-->
+                <!--android:text="5"-->
+                <!--android:button="@null"-->
+                <!--android:drawableBottom="@android:drawable/btn_radio"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/mission5RadioBtn"-->
+                <!--android:enabled="false"-->
+                <!--android:textColor="#000000"-->
+            <!--/>-->
+
+        <!--</RadioGroup>-->
+
     </LinearLayout>
 
 </RelativeLayout>

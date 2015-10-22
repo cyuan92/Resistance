@@ -2,6 +2,7 @@
 <resources>
 
     <color name="purple">#551A8B</color>
-
+    <color name="pass">#A9DDA9</color>
+    <color name="fail">#FFA5A5</color>
 
 </resources>

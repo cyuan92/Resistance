@@ -3,9 +3,12 @@ package com.steveandconnie.projects.resistance;
 import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.HashMap;
 
 
 /**
@@ -18,16 +21,28 @@ import android.view.ViewGroup;
  */
 public class MissionHistoryFragment extends Fragment {
 
+    private int currentMission;
+    private boolean[] missionHistory;
 
-    private OnFragmentInteractionListener mListener;
+    static HashMap<Integer, Integer> missionNumToMissionBtnId = new HashMap<Integer, Integer>();
+    static {
+        missionNumToMissionBtnId.put(1, R.id.mission1Btn);
+        missionNumToMissionBtnId.put(2, R.id.mission2Btn);
+        missionNumToMissionBtnId.put(3, R.id.mission3Btn);
+        missionNumToMissionBtnId.put(4, R.id.mission4Btn);
+        missionNumToMissionBtnId.put(5, R.id.mission5Btn);
+    }
+
+
+        private OnFragmentInteractionListener mListener;
 
     // TODO: Rename and change types and number of parameters
-    public static MissionHistoryFragment newInstance(String param1, String param2) {
+    public static MissionHistoryFragment newInstance(int currentMission, boolean[] missionHistory) {
         MissionHistoryFragment fragment = new MissionHistoryFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putInt("currentMission", currentMission);
+        args.putBooleanArray("missionHistory", missionHistory);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -38,17 +53,34 @@ public class MissionHistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+        Bundle args = getArguments();
+        if (args != null) {
+            this.currentMission = args.getInt("currentMission");
+            this.missionHistory = args.getBooleanArray("missionHistory");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mission_history, container, false);
+        View rtnView = inflater.inflate(R.layout.fragment_mission_history, container, false);
+        Log.d("currentMission", currentMission + "");
+
+        for(int i=1; i<currentMission; i++) {
+            int id = missionNumToMissionBtnId.get(i);
+            Log.d("id", id + "");
+            View missionBtn = rtnView.findViewById(id);
+            if (missionHistory[i-1]) {
+//                missionBtn.setBackgroundResource(R.color.pass);
+                missionBtn.setBackgroundResource(R.drawable.pass_button);
+            } else {
+//                missionBtn.setBackgroundResource(R.color.fail);
+                missionBtn.setBackgroundResource(R.drawable.fail_button);
+            }
+        }
+
+        return rtnView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

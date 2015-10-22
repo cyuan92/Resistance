@@ -60,7 +60,7 @@ public class CurrentMission extends AppCompatActivity {
         // add mission history fragment
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        MissionHistoryFragment fragment = new MissionHistoryFragment();
+        MissionHistoryFragment fragment = MissionHistoryFragment.newInstance(resistanceGame.getCurrentMissionNum(), resistanceGame.getMissionHistory());
         fragmentTransaction.add(R.id.missionHistoryFragmentContainer, fragment);
         fragmentTransaction.commit();
     }
