@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.screens;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,6 +12,13 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.steveandconnie.projects.resistance.R;
+import com.steveandconnie.projects.resistance.common.GameRules;
+import com.steveandconnie.projects.resistance.common.GameUtils;
+import com.steveandconnie.projects.resistance.common.Player;
+import com.steveandconnie.projects.resistance.common.PlayerSelectButtonAdapter;
+import com.steveandconnie.projects.resistance.common.Resistance;
 
 import java.util.ArrayList;
 import java.util.HashMap;

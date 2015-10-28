@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+
+import com.steveandconnie.projects.resistance.R;
+import com.steveandconnie.projects.resistance.common.Player;
+import com.steveandconnie.projects.resistance.common.PlayerRoleButtonAdapter;
+import com.steveandconnie.projects.resistance.common.Resistance;
 
 import java.util.ArrayList;
 import java.util.Collections;

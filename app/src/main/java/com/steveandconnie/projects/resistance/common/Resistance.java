@@ -1,9 +1,10 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.common;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by connieyuan on 9/26/15.

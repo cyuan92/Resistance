@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.common;
 
 /**
  * Created by Steve on 9/9/2015.

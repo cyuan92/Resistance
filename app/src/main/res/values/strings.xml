@@ -39,5 +39,6 @@
     <string name="vote_message">Will this mission be successful?</string>
     <string name="vote_pass">Pass!</string>
     <string name="vote_fail">FAIL</string>
+    <string name="title_activity_mission_vote">MissionVote</string>
 
 </resources>

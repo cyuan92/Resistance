@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.screens;
 
 import android.app.Fragment;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.steveandconnie.projects.resistance.R;
 
 import java.util.HashMap;
 
