@@ -67,17 +67,22 @@ public class MissionHistoryFragment extends Fragment {
         View rtnView = inflater.inflate(R.layout.fragment_mission_history, container, false);
         Log.d("currentMission", currentMission + "");
 
-        for(int i=1; i<currentMission; i++) {
+        for(int i=1; i<=currentMission; i++) {
             int id = missionNumToMissionBtnId.get(i);
             Log.d("id", id + "");
             View missionBtn = rtnView.findViewById(id);
-            if (missionHistory[i-1]) {
-//                missionBtn.setBackgroundResource(R.color.pass);
-                missionBtn.setBackgroundResource(R.drawable.pass_button);
+            if (i == currentMission) {
+                missionBtn.setBackgroundResource(R.drawable.current_button);
             } else {
+                if (missionHistory[i-1]) {
+//                missionBtn.setBackgroundResource(R.color.pass);
+                    missionBtn.setBackgroundResource(R.drawable.pass_button);
+                } else {
 //                missionBtn.setBackgroundResource(R.color.fail);
-                missionBtn.setBackgroundResource(R.drawable.fail_button);
+                    missionBtn.setBackgroundResource(R.drawable.fail_button);
+                }
             }
+
         }
 
         return rtnView;
