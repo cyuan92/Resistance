@@ -25,6 +25,10 @@
             android:name=".CurrentMission"
             android:label="@string/step_three_activity_title" >
         </activity>
+        <activity
+            android:name=".LaunchMission"
+            android:label="@string/title_activity_vote_for_mission" >
+        </activity>
     </application>
 
 </manifest>

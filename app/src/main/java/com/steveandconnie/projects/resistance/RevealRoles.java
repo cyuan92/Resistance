@@ -6,20 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class RevealRoles extends AppCompatActivity {
 
@@ -43,7 +33,7 @@ public class RevealRoles extends AppCompatActivity {
         GridView grid = (GridView) findViewById(R.id.playerRoleBtnGroup);
         grid.setNumColumns(NUM_BTNS_PER_ROW);
         grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-        grid.setAdapter(new ButtonAdapter(this, playerList));
+        grid.setAdapter(new PlayerRoleButtonAdapter(this, playerList));
     }
 
     public void onClickStartMissionsBtn(View view) {
@@ -51,8 +41,13 @@ public class RevealRoles extends AppCompatActivity {
         Intent currentMissionIntent = new Intent(RevealRoles.this, CurrentMission.class);
 
         // pass Resistance object to next activity
-        Resistance resistanceGame = new Resistance(1, new boolean[5]);
+
+        boolean[] missionHistory = new boolean[]{true, true, false, false, false};
+        Resistance resistanceGame = new Resistance(4, missionHistory, playerList);      // for debugging
+//        Resistance resistanceGame = new Resistance(4, new boolean[5], playerList);      // for debugging
+
         currentMissionIntent.putExtra("resistanceGame", resistanceGame);
+        currentMissionIntent.putParcelableArrayListExtra("playerList", playerList);
         RevealRoles.this.startActivity(currentMissionIntent);
     }
 

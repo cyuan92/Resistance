@@ -3,16 +3,19 @@ package com.steveandconnie.projects.resistance;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Created by connieyuan on 9/26/15.
  */
 public class Resistance implements Parcelable {
+
     private int currentMissionNum;
     private boolean[] missionHistory;
+    private ArrayList<Player> playerList;
 
     public static final Parcelable.Creator<Resistance> CREATOR = new Parcelable.Creator<Resistance>() {
+
         public Resistance createFromParcel(Parcel in) {
             return new Resistance(in);
         }
@@ -20,6 +23,7 @@ public class Resistance implements Parcelable {
         public Resistance[] newArray(int size) {
             return new Resistance[size];
         }
+
     };
 
     public int describeContents(){
@@ -29,16 +33,22 @@ public class Resistance implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags){
         parcel.writeInt(currentMissionNum);
         parcel.writeBooleanArray(missionHistory);
+        parcel.writeTypedList(playerList);
     }
 
     public Resistance(Parcel in) {
         currentMissionNum = in.readInt();
         missionHistory = in.createBooleanArray();
+        playerList = new ArrayList<Player>();
+        in.readTypedList(playerList, Player.CREATOR);
     }
 
-    public Resistance(int currentMissionNum, boolean[] missionHistory) {
+
+    // Constructor to create resistance object
+    public Resistance(int currentMissionNum, boolean[] missionHistory, ArrayList<Player> playerList) {
         this.currentMissionNum = currentMissionNum;
         this.missionHistory = missionHistory;
+        this.playerList = playerList;
     }
 
     public int getCurrentMissionNum() {
@@ -51,11 +61,15 @@ public class Resistance implements Parcelable {
     }
 
     public boolean[] getMissionHistory() {
-//        if (currentMissionNum == 1) {
-//            return null;
-//        }
-//        return Arrays.copyOfRange(missionHistory, 0, currentMissionNum-1);
         return missionHistory;
+    }
+
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public int getNumPlayers() {
+        return playerList.size();
     }
 
 }
