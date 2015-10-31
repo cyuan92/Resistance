@@ -33,6 +33,10 @@
             android:name=".screens.MissionVote"
             android:label="@string/title_activity_mission_vote" >
         </activity>
+        <activity
+            android:name=".screens.MissionResult"
+            android:label="@string/title_activity_mission_result" >
+        </activity>
     </application>
 
 </manifest>

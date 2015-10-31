@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.steveandconnie.projects.resistance.common.GameRules;
 import com.steveandconnie.projects.resistance.common.Player;
 import com.steveandconnie.projects.resistance.common.PlayerSelectButtonAdapter;
 import com.steveandconnie.projects.resistance.common.Resistance;
+import com.steveandconnie.projects.resistance.common.Role;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,8 @@ public class LaunchMission extends AppCompatActivity {
 
     private ArrayList<Player> playerList;
     private ArrayList<Player> selectedPlayerList;
-    private HashMap<Player, Boolean> playerVotes;
+    private HashMap<Player, Boolean> playerToVoteMap;
+    private HashMap<String, Player> nameToPlayerMap;
 
     private Resistance resistanceGame;
     private final int NUM_BTNS_PER_ROW = 3;
@@ -36,13 +39,18 @@ public class LaunchMission extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch_mission);
 
-        playerVotes = new HashMap<Player, Boolean>();
+        playerToVoteMap = new HashMap<Player, Boolean>();
 
         // Get objects passed from previous activity
         Intent intent = getIntent();
-        Resistance resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
-//        playerList = resistanceGame.getPlayerList();
+        resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
         selectedPlayerList = intent.getParcelableArrayListExtra("selectedPlayerList");
+
+        // create hashmap of player name to Player
+        nameToPlayerMap = new HashMap<String, Player>();
+        for (Player p : selectedPlayerList) {
+            nameToPlayerMap.put(p.getPlayerName(), p);
+        }
 
         // display voting instructions
         TextView votingInstructions = (TextView) findViewById(R.id.votingInstructions);
@@ -77,10 +85,10 @@ public class LaunchMission extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             // go to next activity for voting
-                String votingPlayerName = (String) buttonView.getText();
-                Intent voteIntent = new Intent(LaunchMission.this, MissionVote.class);
-                voteIntent.putExtra("votingPlayerName", votingPlayerName);
-                LaunchMission.this.startActivityForResult(voteIntent, VOTE_RESULT_REQUEST);
+            String votingPlayerName = (String) buttonView.getText();
+            Intent voteIntent = new Intent(LaunchMission.this, MissionVote.class);
+            voteIntent.putExtra("votingPlayerName", votingPlayerName);
+            LaunchMission.this.startActivityForResult(voteIntent, VOTE_RESULT_REQUEST);
             }
         };
         // create a grid view with player role toggle buttons
@@ -95,29 +103,43 @@ public class LaunchMission extends AppCompatActivity {
             boolean voteResult = backToMission.getBooleanExtra("voteResult", true);
             String votingPlayerName = backToMission.getStringExtra("votingPlayerName");
             Log.d("check result", "onActivityResult returned result: " + voteResult + " votingPlayerName: " + votingPlayerName);
+            // update playerToVoteMap
+            Player votingPlayer = nameToPlayerMap.get(votingPlayerName);
+            playerToVoteMap.put(votingPlayer, voteResult);
         }
     }
 
-//
-//    public static void displayAlertMessage(Context context, String title, String message, String positiveBtnMessage, String negativeBtnMessage) {
-//        AlertDialog.Builder alert = new AlertDialog.Builder(context);
-//        boolean result = true;
-//        alert.setTitle(title);
-//        alert.setMessage(message);
-//        alert.setPositiveButton(positiveBtnMessage, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                // TODO: implement voting
-//            }
-//        });
-//        alert.setNegativeButton(negativeBtnMessage, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                // TODO: implement voting
-//            }
-//        });
-//        alert.show();
-//    }
+    public void onClickRevealMissionResultBtn(View view) {
+        int numFails = countNumFails();
+        boolean missionFailed = false;
+        if (resistanceGame.getCurrentMissionNum() == 4) {
+            // find otu number of fails needed
+            int numFailsNeeded = GameRules.getMissionFourNumFailsNeeded(resistanceGame.getNumPlayers());
+            if (numFails >= numFailsNeeded) {
+                missionFailed = true;
+            }
+        } else if (numFails >= 1) {
+            missionFailed = true;
+        }
+        //
+        Intent showMissionResult = new Intent(LaunchMission.this, MissionResult.class);
+        showMissionResult.putExtra("missionFailed", missionFailed);
+        LaunchMission.this.startActivity(showMissionResult);
+    }
+
+    public int countNumFails() {
+        int numFails = 0;
+        for (Player p : selectedPlayerList) {
+            boolean vote = playerToVoteMap.get(p);
+            // REBELs will always vote pass
+            if (p.getPlayerRole() == Role.REBEL) {
+                vote = true;
+                playerToVoteMap.put(p, vote);
+            }
+            numFails += (vote ? 0 : 1);
+        }
+        return numFails;
+    }
 
     // ---------------------------------------------------------------------------------------------
 

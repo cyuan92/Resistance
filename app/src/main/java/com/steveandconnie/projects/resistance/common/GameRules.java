@@ -94,4 +94,8 @@ public class GameRules {
                 return -1;
         }
     }
+
+    public static int getMissionFourNumFailsNeeded(int numPlayers) {
+        return MISSION_FOUR_FAILS_NEEDED.get(numPlayers);
+    }
 }
