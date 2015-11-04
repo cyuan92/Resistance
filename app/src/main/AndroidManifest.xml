@@ -37,6 +37,10 @@
             android:name=".screens.MissionResult"
             android:label="@string/title_activity_mission_result" >
         </activity>
+        <activity
+            android:name=".screens.FinishGame"
+            android:label="@string/title_activity_finish_game" >
+        </activity>
     </application>
 
 </manifest>

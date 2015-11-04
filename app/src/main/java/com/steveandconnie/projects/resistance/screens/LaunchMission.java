@@ -110,10 +110,11 @@ public class LaunchMission extends AppCompatActivity {
     }
 
     public void onClickRevealMissionResultBtn(View view) {
+        // TODO: check that all players have voted
         int numFails = countNumFails();
         boolean missionFailed = false;
         if (resistanceGame.getCurrentMissionNum() == 4) {
-            // find otu number of fails needed
+            // find out number of fails needed
             int numFailsNeeded = GameRules.getMissionFourNumFailsNeeded(resistanceGame.getNumPlayers());
             if (numFails >= numFailsNeeded) {
                 missionFailed = true;
@@ -121,8 +122,10 @@ public class LaunchMission extends AppCompatActivity {
         } else if (numFails >= 1) {
             missionFailed = true;
         }
+        resistanceGame.setMissionResult(!missionFailed);
         //
         Intent showMissionResult = new Intent(LaunchMission.this, MissionResult.class);
+        showMissionResult.putExtra("resistanceGame", resistanceGame);
         showMissionResult.putExtra("missionFailed", missionFailed);
         LaunchMission.this.startActivity(showMissionResult);
     }

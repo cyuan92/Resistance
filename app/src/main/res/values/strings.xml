@@ -36,14 +36,12 @@
     <!-- screen 4 -->
     <string name="vote_for_mission_instructions">Select the player to vote</string>
     <string name="vote_title">It\'s time to vote!</string>
-    <!--<string name="vote_message">Will this mission be successful?</string>-->
-    <!--<string name="vote_pass">Pass!</string>-->
-    <!--<string name="vote_fail">FAIL</string>-->
-
     <string name="reveal_mission_result">Reveal mission result</string>
-
-    <!-- -->
     <string name="title_activity_mission_vote">MissionVote</string>
+
+    <!-- screen 5 -->
     <string name="title_activity_mission_result">MissionResult</string>
+    <string name="go_to_next_mission_btn">Go to next mission</string>
+    <string name="title_activity_finish_game">FinishGame</string>
 
 </resources>

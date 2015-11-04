@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 
 /**
  * Created by connieyuan on 9/26/15.
@@ -46,6 +46,12 @@ public class Resistance implements Parcelable {
 
 
     // Constructor to create resistance object
+    public Resistance(ArrayList<Player> playerList) {
+        this.currentMissionNum = 1;
+        this.missionHistory = new boolean[0];
+        this.playerList = playerList;
+    }
+
     public Resistance(int currentMissionNum, boolean[] missionHistory, ArrayList<Player> playerList) {
         this.currentMissionNum = currentMissionNum;
         this.missionHistory = missionHistory;
@@ -56,9 +62,13 @@ public class Resistance implements Parcelable {
         return currentMissionNum;
     }
 
-    public void setMissionResult(boolean result) {
-        missionHistory[currentMissionNum-1] = result;
+    public void incrementMissionNum() {
         currentMissionNum++;
+    }
+
+    public void setMissionResult(boolean result) {
+        missionHistory = Arrays.copyOf(missionHistory, missionHistory.length+1);
+        missionHistory[currentMissionNum-1] = result;
     }
 
     public boolean[] getMissionHistory() {
@@ -71,6 +81,30 @@ public class Resistance implements Parcelable {
 
     public int getNumPlayers() {
         return playerList.size();
+    }
+
+    public boolean checkIfGameOver() {
+        if (currentMissionNum < 3) {
+            return false;
+        } else if (currentMissionNum == 3 || currentMissionNum == 4) {
+            int numPass = 0;
+            int numFail = 0;
+            for (int i = 0; i < currentMissionNum; i++) {
+                if (missionHistory[i]) {
+                    numPass += 1;
+                } else {
+                    numFail += 1;
+                }
+            }
+            if (numPass >= 3 || numFail >= 3) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (currentMissionNum == 5) {
+            return true;
+        }
+        return false;
     }
 
 }

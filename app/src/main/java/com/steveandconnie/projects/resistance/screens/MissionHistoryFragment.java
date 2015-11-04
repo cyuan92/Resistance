@@ -1,6 +1,8 @@
 package com.steveandconnie.projects.resistance.screens;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +38,7 @@ public class MissionHistoryFragment extends Fragment {
     }
 
 
-        private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     // TODO: Rename and change types and number of parameters
     public static MissionHistoryFragment newInstance(int currentMission, boolean[] missionHistory) {
@@ -69,23 +71,19 @@ public class MissionHistoryFragment extends Fragment {
         View rtnView = inflater.inflate(R.layout.fragment_mission_history, container, false);
         Log.d("currentMission", currentMission + "");
 
-        for(int i=1; i<=currentMission; i++) {
-            int id = missionNumToMissionBtnId.get(i);
-            Log.d("id", id + "");
+        for (int i=0; i<missionHistory.length; i++) {
+            int id = missionNumToMissionBtnId.get(i+1);
             View missionBtn = rtnView.findViewById(id);
-            if (i == currentMission) {
-                missionBtn.setBackgroundResource(R.drawable.current_button);
+            if (missionHistory[i]) {
+                missionBtn.setBackgroundResource(R.drawable.pass_button);
             } else {
-                if (missionHistory[i-1]) {
-//                missionBtn.setBackgroundResource(R.color.pass);
-                    missionBtn.setBackgroundResource(R.drawable.pass_button);
-                } else {
-//                missionBtn.setBackgroundResource(R.color.fail);
-                    missionBtn.setBackgroundResource(R.drawable.fail_button);
-                }
+                missionBtn.setBackgroundResource(R.drawable.fail_button);
             }
-
         }
+        int currentMissionId = missionNumToMissionBtnId.get(currentMission-2);
+        View currentMissionBtn = rtnView.findViewById(currentMissionId);
+        GradientDrawable shape = (GradientDrawable) currentMissionBtn.getBackground();
+        shape.setStroke(3, Color.BLACK);
 
         return rtnView;
     }
