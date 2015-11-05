@@ -14,32 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="70"
-            android:layout_height="0dp">
+            android:id="@+id/linearLayout">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/votingInstructions"
+                android:layout_gravity="left" />
+
+            <GridView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/linearLayout">
+                android:layout_height="wrap_content"
+                android:id="@+id/playerBtnGroup"
+                android:layout_gravity="center_horizontal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/votingInstructions"
-                    android:layout_gravity="left" />
-
-                <GridView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/playerBtnGroup"
-                    android:layout_gravity="center_horizontal" />
-
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"

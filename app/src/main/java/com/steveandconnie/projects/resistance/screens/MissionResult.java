@@ -28,6 +28,8 @@ public class MissionResult extends AppCompatActivity {
         Intent intent = getIntent();
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
 
+        // TODO: implement a countdown
+
         missionFailed = intent.getBooleanExtra("missionFailed", false);
         TextView text = (TextView) findViewById(R.id.missionResultText);
         if (missionFailed) {

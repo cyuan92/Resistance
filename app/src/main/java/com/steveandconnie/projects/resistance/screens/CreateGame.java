@@ -52,13 +52,21 @@ public class CreateGame extends AppCompatActivity {
     }
 
     public void onClickAddPlayerBtn(View view) {
+        LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
+
+        // do not want more than 10 players
+        if (playerNamesGroup.getChildCount() >= 10) {
+            return;
+        }
+
         // add a player
         PlayerItem item = new PlayerItem(this);
 
         // add player item to overall players list
-        final LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
         playerNamesGroup.addView(item);
 
+        // scroll to added player
+        item.getParent().requestChildFocus(item, item);
     }
 
     public void onClickStartBtn(View view) {
@@ -71,9 +79,9 @@ public class CreateGame extends AppCompatActivity {
         List<String> playerNames = new ArrayList<String>();
         for(int i = 0; i < playerGroup.getChildCount(); i++ ) {
             // children in id.playerNamesGroup are PlayerItems (linear layouts)
-            PlayerItem player = (PlayerItem)playerGroup.getChildAt(i);
+            PlayerItem player = (PlayerItem) playerGroup.getChildAt(i);
 
-            // FOR TESTING
+            // TODO: remove this testing code
             EditText playerName = (EditText) player.getChildAt(0);
             playerName.setText("Player"+i);
 
@@ -105,6 +113,7 @@ public class CreateGame extends AppCompatActivity {
             Intent revealRolesIntent = new Intent(CreateGame.this, RevealRoles.class);
 
             // create instance of Resistance object
+            // TODO: remove this test code
             boolean[] missionHistory = new boolean[]{true, true, false};
             Resistance resistanceGame = new Resistance(4, missionHistory, playerList);      // for debugging
 //        Resistance resistanceGame = new Resistance(playerList);
