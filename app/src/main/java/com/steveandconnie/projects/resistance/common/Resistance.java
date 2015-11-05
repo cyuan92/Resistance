@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by connieyuan on 9/26/15.
@@ -14,17 +15,16 @@ public class Resistance implements Parcelable {
     private int currentMissionNum;
     private boolean[] missionHistory;
     private ArrayList<Player> playerList;
+    private HashMap<String, Player> nameToPlayerMap;
 
+    // functions for Parcelable object
     public static final Parcelable.Creator<Resistance> CREATOR = new Parcelable.Creator<Resistance>() {
-
         public Resistance createFromParcel(Parcel in) {
             return new Resistance(in);
         }
-
         public Resistance[] newArray(int size) {
             return new Resistance[size];
         }
-
     };
 
     public int describeContents(){
@@ -35,6 +35,11 @@ public class Resistance implements Parcelable {
         parcel.writeInt(currentMissionNum);
         parcel.writeBooleanArray(missionHistory);
         parcel.writeTypedList(playerList);
+        parcel.writeInt(nameToPlayerMap.size());
+        for (String key: nameToPlayerMap.keySet()) {
+            parcel.writeString(key);
+            parcel.writeParcelable(nameToPlayerMap.get(key), 0);
+        }
     }
 
     public Resistance(Parcel in) {
@@ -42,10 +47,19 @@ public class Resistance implements Parcelable {
         missionHistory = in.createBooleanArray();
         playerList = new ArrayList<Player>();
         in.readTypedList(playerList, Player.CREATOR);
+
+        nameToPlayerMap = new HashMap<String, Player>();
+        int size = in.readInt();
+        for (int i=0; i<size; i++) {
+            String key = in.readString();
+            Player player = in.readParcelable(Player.class.getClassLoader());
+            nameToPlayerMap.put(key, player);
+        }
     }
+    // end functions for Parcelable object
 
 
-    // Constructor to create resistance object
+    // constructors to create resistance object
     public Resistance(ArrayList<Player> playerList) {
         this.currentMissionNum = 1;
         this.missionHistory = new boolean[0];
@@ -56,8 +70,15 @@ public class Resistance implements Parcelable {
         this.currentMissionNum = currentMissionNum;
         this.missionHistory = missionHistory;
         this.playerList = playerList;
+        nameToPlayerMap = new HashMap<String, Player>();
+        for(Player player : playerList) {
+            nameToPlayerMap.put(player.getPlayerName(), player);
+        }
     }
+    // end constructors
 
+
+    // current mission number
     public int getCurrentMissionNum() {
         return currentMissionNum;
     }
@@ -65,7 +86,10 @@ public class Resistance implements Parcelable {
     public void incrementMissionNum() {
         currentMissionNum++;
     }
+    // end current mission number
 
+
+    // mission history
     public void setMissionResult(boolean result) {
         missionHistory = Arrays.copyOf(missionHistory, missionHistory.length+1);
         missionHistory[currentMissionNum-1] = result;
@@ -74,7 +98,10 @@ public class Resistance implements Parcelable {
     public boolean[] getMissionHistory() {
         return missionHistory;
     }
+    // end mission history
 
+
+    // player list
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
@@ -83,6 +110,13 @@ public class Resistance implements Parcelable {
         return playerList.size();
     }
 
+    public Player getPlayerFromName(String name) {
+        return nameToPlayerMap.get(name);
+    }
+    // end player list
+
+
+    // game progression
     public boolean checkIfGameOver() {
         if (currentMissionNum < 3) {
             return false;
@@ -106,5 +140,5 @@ public class Resistance implements Parcelable {
         }
         return false;
     }
-
+    // end game progression
 }
