@@ -41,6 +41,7 @@ public class CurrentMission extends AppCompatActivity {
         // Get objects passed from previous activity
         Intent intent = getIntent();
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
+        // TODO: put playerList and nameToPlayerMap in Resistance object
         playerList = intent.getParcelableArrayListExtra("playerList");
         nameToPlayerMap = new HashMap<String, Player>();
         for(Player player : playerList) {

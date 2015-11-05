@@ -37,10 +37,12 @@ public class MissionHistoryFragment extends Fragment {
         missionNumToMissionBtnId.put(5, R.id.mission5Btn);
     }
 
-
     private OnFragmentInteractionListener mListener;
 
-    // TODO: Rename and change types and number of parameters
+    public MissionHistoryFragment() {
+        // Required empty public constructor
+    }
+
     public static MissionHistoryFragment newInstance(int currentMission, boolean[] missionHistory) {
         MissionHistoryFragment fragment = new MissionHistoryFragment();
         Bundle args = new Bundle();
@@ -48,10 +50,6 @@ public class MissionHistoryFragment extends Fragment {
         args.putBooleanArray("missionHistory", missionHistory);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public MissionHistoryFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -69,42 +67,36 @@ public class MissionHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rtnView = inflater.inflate(R.layout.fragment_mission_history, container, false);
-        Log.d("currentMission", currentMission + "");
 
+        // color the mission buttons based on mission pass or fail
         for (int i=0; i<missionHistory.length; i++) {
+            // grab mission button
             int id = missionNumToMissionBtnId.get(i+1);
             View missionBtn = rtnView.findViewById(id);
+            // change button color
             if (missionHistory[i]) {
                 missionBtn.setBackgroundResource(R.drawable.pass_button);
             } else {
                 missionBtn.setBackgroundResource(R.drawable.fail_button);
             }
         }
-        int currentMissionId = missionNumToMissionBtnId.get(currentMission-2);
+
+        // draw an outline around the current mission's button
+        Log.d("currentMission", currentMission + "");
+        int currentMissionId = missionNumToMissionBtnId.get(currentMission);
         View currentMissionBtn = rtnView.findViewById(currentMissionId);
         GradientDrawable shape = (GradientDrawable) currentMissionBtn.getBackground();
+        shape.mutate();                     // do not want to affect other instances of the same drawable resource
         shape.setStroke(3, Color.BLACK);
 
         return rtnView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {

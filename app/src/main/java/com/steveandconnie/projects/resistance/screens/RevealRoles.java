@@ -49,6 +49,7 @@ public class RevealRoles extends AppCompatActivity {
 
         boolean[] missionHistory = new boolean[]{true, true, false};
         Resistance resistanceGame = new Resistance(4, missionHistory, playerList);      // for debugging
+//        Resistance resistanceGame = new Resistance(playerList);
 
         currentMissionIntent.putExtra("resistanceGame", resistanceGame);
         currentMissionIntent.putParcelableArrayListExtra("playerList", playerList);

@@ -46,6 +46,7 @@ public class LaunchMission extends AppCompatActivity {
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
         selectedPlayerList = intent.getParcelableArrayListExtra("selectedPlayerList");
 
+        // TODO: put nameToPlayerMap in Resistance object
         // create hashmap of player name to Player
         nameToPlayerMap = new HashMap<String, Player>();
         for (Player p : selectedPlayerList) {
