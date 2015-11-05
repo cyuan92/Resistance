@@ -26,7 +26,6 @@ import java.util.HashMap;
 
 public class LaunchMission extends AppCompatActivity {
 
-    private ArrayList<Player> playerList;
     private ArrayList<Player> selectedPlayerList;
     private HashMap<Player, Boolean> playerToVoteMap;
     private HashMap<String, Player> nameToPlayerMap;
@@ -47,7 +46,6 @@ public class LaunchMission extends AppCompatActivity {
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
         selectedPlayerList = intent.getParcelableArrayListExtra("selectedPlayerList");
 
-        // TODO: put nameToPlayerMap in Resistance object
         // create hashmap of player name to Player
         nameToPlayerMap = new HashMap<String, Player>();
         for (Player p : selectedPlayerList) {

@@ -18,6 +18,7 @@ import java.util.Collections;
 
 public class RevealRoles extends AppCompatActivity {
 
+    private Resistance resistanceGame;
     private ArrayList<Player> playerList;
     private final int NUM_BTNS_PER_ROW = 3;
 
@@ -26,12 +27,13 @@ public class RevealRoles extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reveal_roles);
         Intent intent = getIntent();
-        playerList = intent.getParcelableArrayListExtra("playerList");
+        resistanceGame = intent.getParcelableExtra("resistanceGame");
         createPlayerRoleBtns();
     }
 
     private void createPlayerRoleBtns() {
         // shuffle to make sure identity not guessable
+        playerList = resistanceGame.getPlayerList();
         Collections.shuffle(playerList);
 
         // create a grid view with player role toggle buttons
@@ -46,11 +48,6 @@ public class RevealRoles extends AppCompatActivity {
         Intent currentMissionIntent = new Intent(RevealRoles.this, CurrentMission.class);
 
         // pass Resistance object to next activity
-
-        boolean[] missionHistory = new boolean[]{true, true, false};
-        Resistance resistanceGame = new Resistance(4, missionHistory, playerList);      // for debugging
-//        Resistance resistanceGame = new Resistance(playerList);
-
         currentMissionIntent.putExtra("resistanceGame", resistanceGame);
         currentMissionIntent.putParcelableArrayListExtra("playerList", playerList);
         RevealRoles.this.startActivity(currentMissionIntent);

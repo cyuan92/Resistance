@@ -16,6 +16,7 @@ import com.steveandconnie.projects.resistance.R;
 import com.steveandconnie.projects.resistance.common.GameRules;
 import com.steveandconnie.projects.resistance.common.GameUtils;
 import com.steveandconnie.projects.resistance.common.Player;
+import com.steveandconnie.projects.resistance.common.Resistance;
 import com.steveandconnie.projects.resistance.common.Role;
 
 import java.util.ArrayList;
@@ -103,8 +104,13 @@ public class CreateGame extends AppCompatActivity {
             // start screen 2 intent
             Intent revealRolesIntent = new Intent(CreateGame.this, RevealRoles.class);
 
+            // create instance of Resistance object
+            boolean[] missionHistory = new boolean[]{true, true, false};
+            Resistance resistanceGame = new Resistance(4, missionHistory, playerList);      // for debugging
+//        Resistance resistanceGame = new Resistance(playerList);
+
             // pass playerList to next activity
-            revealRolesIntent.putParcelableArrayListExtra("playerList", playerList);
+            revealRolesIntent.putExtra("resistanceGame", resistanceGame);
             CreateGame.this.startActivity(revealRolesIntent);
         }
     }
