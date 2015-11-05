@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.steveandconnie.projects.resistance.R;
 import com.steveandconnie.projects.resistance.common.GameRules;
+import com.steveandconnie.projects.resistance.common.GameUtils;
 import com.steveandconnie.projects.resistance.common.Player;
 import com.steveandconnie.projects.resistance.common.PlayerSelectButtonAdapter;
 import com.steveandconnie.projects.resistance.common.Resistance;
@@ -111,7 +112,17 @@ public class LaunchMission extends AppCompatActivity {
     }
 
     public void onClickRevealMissionResultBtn(View view) {
-        // TODO: check that all players have voted
+        // check that all players have voted
+        Log.d("LaunchMission checkpt", "playerToVoteMap.size()=" + playerToVoteMap.keySet().size() + ", selectedPlayerList.size()=" + selectedPlayerList.size());
+        if (playerToVoteMap.keySet().size() < selectedPlayerList.size()) {
+            // display error message and try again
+            String title = this.getString(R.string.alert_title);
+            String message = this.getString(R.string.not_all_players_voted);
+            String positiveBtnMessage = this.getString(R.string.alert_okay);
+            GameUtils.displayAlertMessage(this, title, message, positiveBtnMessage);
+            return;
+        }
+        // proceed
         int numFails = countNumFails();
         boolean missionFailed = false;
         if (resistanceGame.getCurrentMissionNum() == 4) {
