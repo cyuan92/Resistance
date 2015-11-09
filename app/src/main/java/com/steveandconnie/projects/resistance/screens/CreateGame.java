@@ -33,13 +33,22 @@ public class CreateGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
-
-        // dynamically create min new players
+        Intent intent = getIntent();
+        ArrayList<Player> playerList = intent.getParcelableArrayListExtra("playerList");
         final LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
-        for (int i = 0; i < MIN_NUM_PLAYERS; i++) {
-            PlayerItem item = new PlayerItem(this);
-            // add player item to overall players list
-            playerNamesGroup.addView(item);
+        if (playerList == null) {
+            // dynamically create min new players
+            for (int i = 0; i < MIN_NUM_PLAYERS; i++) {
+                PlayerItem item = new PlayerItem(this, null);
+                // add player item to overall players list
+                playerNamesGroup.addView(item);
+            }
+        } else {
+            for (Player player : playerList) {
+                PlayerItem item = new PlayerItem(this, player.getPlayerName());
+                playerNamesGroup.addView(item);
+            }
+
         }
     }
 
@@ -60,7 +69,7 @@ public class CreateGame extends AppCompatActivity {
         }
 
         // add a player
-        PlayerItem item = new PlayerItem(this);
+        PlayerItem item = new PlayerItem(this, null);
 
         // add player item to overall players list
         playerNamesGroup.addView(item);
@@ -176,15 +185,19 @@ public class CreateGame extends AppCompatActivity {
         private String playerName = null;
         private EditText playerNameEditText;
 
-        private PlayerItem(Context context) {
+        private PlayerItem(Context context, String playerName) {
             super(context);
             this.setOrientation(LinearLayout.HORIZONTAL);
 
             this.playerNameEditText = new EditText(context);
 
-            // add player hint to each input
-            String playerHint = context.getString(R.string.player_hint);
-            this.playerNameEditText.setHint(playerHint);
+            if (playerName == null || playerName.isEmpty()) {
+                // add player hint to each input
+                String playerHint = context.getString(R.string.player_hint);
+                this.playerNameEditText.setHint(playerHint);
+            } else {
+                this.playerNameEditText.setText(playerName);
+            }
 
             // give the edit text a width_weight
             LinearLayout.LayoutParams playerParams = new LinearLayout.LayoutParams(
