@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.common;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
+
+import com.steveandconnie.projects.resistance.common.Player;
 
 import java.util.List;
 

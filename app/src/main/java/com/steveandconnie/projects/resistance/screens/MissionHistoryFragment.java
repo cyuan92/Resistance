@@ -1,12 +1,16 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.screens;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.steveandconnie.projects.resistance.R;
 
 import java.util.HashMap;
 
@@ -33,10 +37,12 @@ public class MissionHistoryFragment extends Fragment {
         missionNumToMissionBtnId.put(5, R.id.mission5Btn);
     }
 
+    private OnFragmentInteractionListener mListener;
 
-        private OnFragmentInteractionListener mListener;
+    public MissionHistoryFragment() {
+        // Required empty public constructor
+    }
 
-    // TODO: Rename and change types and number of parameters
     public static MissionHistoryFragment newInstance(int currentMission, boolean[] missionHistory) {
         MissionHistoryFragment fragment = new MissionHistoryFragment();
         Bundle args = new Bundle();
@@ -44,10 +50,6 @@ public class MissionHistoryFragment extends Fragment {
         args.putBooleanArray("missionHistory", missionHistory);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public MissionHistoryFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -65,46 +67,36 @@ public class MissionHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rtnView = inflater.inflate(R.layout.fragment_mission_history, container, false);
-        Log.d("currentMission", currentMission + "");
 
-        for(int i=1; i<=currentMission; i++) {
-            int id = missionNumToMissionBtnId.get(i);
-            Log.d("id", id + "");
+        // color the mission buttons based on mission pass or fail
+        for (int i=0; i<missionHistory.length; i++) {
+            // grab mission button
+            int id = missionNumToMissionBtnId.get(i+1);
             View missionBtn = rtnView.findViewById(id);
-            if (i == currentMission) {
-                missionBtn.setBackgroundResource(R.drawable.current_button);
+            // change button color
+            if (missionHistory[i]) {
+                missionBtn.setBackgroundResource(R.drawable.pass_button);
             } else {
-                if (missionHistory[i-1]) {
-//                missionBtn.setBackgroundResource(R.color.pass);
-                    missionBtn.setBackgroundResource(R.drawable.pass_button);
-                } else {
-//                missionBtn.setBackgroundResource(R.color.fail);
-                    missionBtn.setBackgroundResource(R.drawable.fail_button);
-                }
+                missionBtn.setBackgroundResource(R.drawable.fail_button);
             }
-
         }
+
+        // draw an outline around the current mission's button
+        Log.d("currentMission", currentMission + "");
+        int currentMissionId = missionNumToMissionBtnId.get(currentMission);
+        View currentMissionBtn = rtnView.findViewById(currentMissionId);
+        GradientDrawable shape = (GradientDrawable) currentMissionBtn.getBackground();
+        shape.mutate();                     // do not want to affect other instances of the same drawable resource
+        shape.setStroke(3, Color.BLACK);
 
         return rtnView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
@@ -123,7 +115,6 @@ public class MissionHistoryFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 

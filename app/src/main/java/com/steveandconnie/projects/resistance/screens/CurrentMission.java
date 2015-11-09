@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.screens;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,6 +12,13 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.steveandconnie.projects.resistance.R;
+import com.steveandconnie.projects.resistance.common.GameRules;
+import com.steveandconnie.projects.resistance.common.GameUtils;
+import com.steveandconnie.projects.resistance.common.Player;
+import com.steveandconnie.projects.resistance.common.PlayerSelectButtonAdapter;
+import com.steveandconnie.projects.resistance.common.Resistance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,11 +41,6 @@ public class CurrentMission extends AppCompatActivity {
         // Get objects passed from previous activity
         Intent intent = getIntent();
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
-        playerList = intent.getParcelableArrayListExtra("playerList");
-        nameToPlayerMap = new HashMap<String, Player>();
-        for(Player player : playerList) {
-            nameToPlayerMap.put(player.getPlayerName(), player);
-        }
 
         // Display text instructions for how many players to select on this mission
         int numPlayers = resistanceGame.getNumPlayers();
@@ -70,6 +72,7 @@ public class CurrentMission extends AppCompatActivity {
         GridView grid = (GridView) findViewById(R.id.playerBtnGroup);
         grid.setNumColumns(NUM_BTNS_PER_ROW);
         grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        playerList = resistanceGame.getPlayerList();
         grid.setAdapter(new PlayerSelectButtonAdapter(this, playerList, null));
     }
 
@@ -83,7 +86,7 @@ public class CurrentMission extends AppCompatActivity {
 
             if (playerBtn.isChecked()) {
                 String playerName = playerBtn.getText().toString();
-                Player player = nameToPlayerMap.get(playerName);
+                Player player = resistanceGame.getPlayerFromName(playerName);
                 selectedPlayerList.add(player);
             }
         }
@@ -93,7 +96,6 @@ public class CurrentMission extends AppCompatActivity {
             // go vote
             Intent voteForMissionIntent = new Intent(CurrentMission.this, LaunchMission.class);
             voteForMissionIntent.putExtra("resistanceGame", resistanceGame);
-            voteForMissionIntent.putParcelableArrayListExtra("playerList", playerList);
             voteForMissionIntent.putParcelableArrayListExtra("selectedPlayerList", selectedPlayerList);
             CurrentMission.this.startActivity(voteForMissionIntent);
         } else {

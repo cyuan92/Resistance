@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.common;
 
 import android.util.SparseIntArray;
 
@@ -93,5 +93,9 @@ public class GameRules {
             default:
                 return -1;
         }
+    }
+
+    public static int getMissionFourNumFailsNeeded(int numPlayers) {
+        return MISSION_FOUR_FAILS_NEEDED.get(numPlayers);
     }
 }

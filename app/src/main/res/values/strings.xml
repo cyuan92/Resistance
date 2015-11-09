@@ -1,16 +1,14 @@
 <resources>
     <string name="app_name">Resistance</string>
 
-    <string name="step_one_activity_title">Step 1: Create a game</string>
-    <string name="step_two_activity_title">Step 2: Reveal roles</string>
-    <string name="step_three_activity_title">Step 3: Go on Mission</string>
-
     <!-- screen 1-->
+    <string name="step_one_activity_title">Step 1: Create a game</string>
     <string name="game_name_hint">Game name</string>
     <string name="player_hint">Player</string>
     <string name="remove_btn_name">Remove</string>
 
     <!-- screen 2 -->
+    <string name="step_two_activity_title">Step 2: Reveal roles</string>
     <string name="reveal_role_instructions">Click on your name to see your role</string>
     <string name="start_missions">Start Missions</string>
 
@@ -21,23 +19,33 @@
     <string name="alert_okay">Got it</string>
 
     <!-- screen 3 -->
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_current_mission">CurrentMission</string>
+    <string name="step_three_activity_title">Step 3: Go on mission</string>
+
     <string name="current_mission_instructions">Select %1$d players to go on this mission</string>
     <string name="fourth_mission_instructions">. %1$d fail votes are needed to fail this mission</string>
-    <string name="num_players_selected_alert_message">Only %1$d players allowed on this mission!\n</string>
+    <string name="num_players_selected_alert_message">There must be %1$d players on this mission!\n</string>
     <string name="vote_missions">Vote for this Mission</string>
-    <string name="title_activity_vote_for_mission">VoteForMission</string>
 
     <!-- mission history fragment -->
     <string name="mission_history_fragment_title">Missions</string>
 
     <!-- screen 4 -->
+    <string name="title_activity_vote_for_mission">Step 4: Vote for this mission</string>
+    <string name="title_activity_mission_vote">Cast your vote</string>
     <string name="vote_for_mission_instructions">Select the player to vote</string>
     <string name="vote_title">It\'s time to vote!</string>
-    <string name="vote_message">Will this mission be successful?</string>
-    <string name="vote_pass">Pass!</string>
-    <string name="vote_fail">FAIL</string>
+    <string name="reveal_mission_result">Reveal mission result</string>
+
+    <!-- screen 5 -->
+    <string name="title_activity_mission_result">Mission result</string>
+    <string name="go_to_next_mission_btn">Go to next mission</string>
+    <string name="not_all_players_voted">Not all players have voted</string>
+
+    <!-- screen 6 -->
+    <string name="title_activity_finish_game">Game over!</string>
+
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

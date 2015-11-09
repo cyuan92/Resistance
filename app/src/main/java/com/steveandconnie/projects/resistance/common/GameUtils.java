@@ -1,4 +1,4 @@
-package com.steveandconnie.projects.resistance;
+package com.steveandconnie.projects.resistance.common;
 
 import android.app.AlertDialog;
 import android.content.Context;
