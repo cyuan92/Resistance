@@ -16,6 +16,8 @@ public class Resistance implements Parcelable {
     private boolean[] missionHistory;
     private ArrayList<Player> playerList;
     private HashMap<String, Player> nameToPlayerMap;
+    private int numPass;
+    private int numFail;
 
     // functions for Parcelable object
     public static final Parcelable.Creator<Resistance> CREATOR = new Parcelable.Creator<Resistance>() {
@@ -40,6 +42,8 @@ public class Resistance implements Parcelable {
             parcel.writeString(key);
             parcel.writeParcelable(nameToPlayerMap.get(key), 0);
         }
+        parcel.writeInt(numPass);
+        parcel.writeInt(numFail);
     }
 
     public Resistance(Parcel in) {
@@ -55,6 +59,9 @@ public class Resistance implements Parcelable {
             Player player = in.readParcelable(Player.class.getClassLoader());
             nameToPlayerMap.put(key, player);
         }
+
+        numPass = in.readInt();
+        numFail = in.readInt();
     }
     // end functions for Parcelable object
 
@@ -64,8 +71,11 @@ public class Resistance implements Parcelable {
         this.currentMissionNum = 1;
         this.missionHistory = new boolean[0];
         this.playerList = playerList;
+        this.numPass = 0;
+        this.numFail = 0;
     }
 
+    // for debugging
     public Resistance(int currentMissionNum, boolean[] missionHistory, ArrayList<Player> playerList) {
         this.currentMissionNum = currentMissionNum;
         this.missionHistory = missionHistory;
@@ -73,6 +83,14 @@ public class Resistance implements Parcelable {
         nameToPlayerMap = new HashMap<String, Player>();
         for(Player player : playerList) {
             nameToPlayerMap.put(player.getPlayerName(), player);
+        }
+
+        for (boolean missionResult : missionHistory) {
+            if (missionResult) {
+                this.numPass++;
+            } else {
+                this.numFail++;
+            }
         }
     }
     // end constructors
@@ -93,6 +111,11 @@ public class Resistance implements Parcelable {
     public void setMissionResult(boolean result) {
         missionHistory = Arrays.copyOf(missionHistory, missionHistory.length+1);
         missionHistory[currentMissionNum-1] = result;
+        if (result) {
+            numPass++;
+        } else {
+            numFail++;
+        }
     }
 
     public boolean[] getMissionHistory() {
@@ -118,27 +141,41 @@ public class Resistance implements Parcelable {
 
     // game progression
     public boolean checkIfGameOver() {
-        if (currentMissionNum < 3) {
-            return false;
-        } else if (currentMissionNum == 3 || currentMissionNum == 4) {
-            int numPass = 0;
-            int numFail = 0;
-            for (int i = 0; i < currentMissionNum; i++) {
-                if (missionHistory[i]) {
-                    numPass += 1;
-                } else {
-                    numFail += 1;
-                }
-            }
-            if (numPass >= 3 || numFail >= 3) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (currentMissionNum == 5) {
-            return true;
+        return numPass >= 3 || numFail >= 3;
+//
+//        if (currentMissionNum < 3) {
+//            return false;
+//        } else if (currentMissionNum == 3 || currentMissionNum == 4) {
+//            int numPass = 0;
+//            int numFail = 0;
+//            for (int i = 0; i < currentMissionNum; i++) {
+//                if (missionHistory[i]) {
+//                    numPass += 1;
+//                } else {
+//                    numFail += 1;
+//                }
+//            }
+//            if (numPass >= 3 || numFail >= 3) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        } else if (currentMissionNum == 5) {
+//            return true;
+//        }
+//        return false;
+    }
+
+    public Role getWinner() {
+        Role winner = null;
+        if (numPass >= 3) {
+            winner = Role.REBEL;
+        } else if (numFail >= 3) {
+            winner = Role.SPY;
         }
-        return false;
+
+        return winner;
     }
     // end game progression
+
 }

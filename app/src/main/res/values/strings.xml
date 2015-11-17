@@ -43,7 +43,9 @@
 
     <!-- screen 6 -->
     <string name="title_activity_finish_game">Game over!</string>
-
+    <string name="rebel_win_announcement">Rebels win!</string>
+    <string name="spy_win_announcement">Spies win!</string>
+    <string name="start_new_game">Start New Game</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
