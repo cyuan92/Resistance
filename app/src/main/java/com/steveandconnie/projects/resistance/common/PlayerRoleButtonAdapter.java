@@ -1,6 +1,7 @@
 package com.steveandconnie.projects.resistance.common;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,14 @@ public class PlayerRoleButtonAdapter extends BaseAdapter {
 
     private Context context;
     private List<Player> playerList;
+    private MediaPlayer onMp;
+    private MediaPlayer offMp;
 
-    public PlayerRoleButtonAdapter(Context context, List<Player> playerList) {
+    public PlayerRoleButtonAdapter(Context context, List<Player> playerList, int onResId, int offResId) {
         this.context = context;
         this.playerList = playerList;
+        this.onMp = MediaPlayer.create(context, onResId);
+        this.offMp = MediaPlayer.create(context, offResId);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class PlayerRoleButtonAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ToggleButton playerRoleBtn;
+        final ToggleButton playerRoleBtn;
         if (convertView == null) {
             // create player toggle button from playerList
             Player player = playerList.get(position);
@@ -49,6 +54,23 @@ public class PlayerRoleButtonAdapter extends BaseAdapter {
             playerRoleBtn.setText(player.getPlayerName());
             playerRoleBtn.setTextOff(player.getPlayerName());
             playerRoleBtn.setTextOn(player.getPlayerRole().toString());
+            playerRoleBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (playerRoleBtn.isChecked()) {
+                        while (onMp.isPlaying() || offMp.isPlaying()) {
+                            // wait to complete
+                        }
+                        onMp.start();
+                    } else {
+                        while (onMp.isPlaying() || offMp.isPlaying()) {
+                            // wait to complete
+                        }
+                        offMp.start();
+                    }
+
+                }
+            });
 
             // size the toggle button
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();

@@ -2,6 +2,7 @@ package com.steveandconnie.projects.resistance.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +41,7 @@ public class RevealRoles extends AppCompatActivity {
         GridView grid = (GridView) findViewById(R.id.playerRoleBtnGroup);
         grid.setNumColumns(NUM_BTNS_PER_ROW);
         grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-        grid.setAdapter(new PlayerRoleButtonAdapter(this, playerList));
+        grid.setAdapter(new PlayerRoleButtonAdapter(this, playerList, R.raw.chime, R.raw.endchime));
     }
 
     public void onClickStartMissionsBtn(View view) {
