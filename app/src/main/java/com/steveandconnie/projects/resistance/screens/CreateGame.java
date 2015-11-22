@@ -3,12 +3,12 @@ package com.steveandconnie.projects.resistance.screens;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,14 +28,17 @@ public class CreateGame extends AppCompatActivity {
 
     public static final int MIN_NUM_PLAYERS = 5;
     public static final int MAX_NUM_PLAYERS = 10;
-    private static int numPlayers = 0;
+    private static int numPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
+
         Intent intent = getIntent();
         ArrayList<Player> playerList = intent.getParcelableArrayListExtra("playerList");
+        numPlayers = 0;
+
         final LinearLayout playerNamesGroup = (LinearLayout) findViewById(R.id.playerNamesGroup);
         if (playerList == null) {
             // dynamically create min new players
@@ -191,6 +194,9 @@ public class CreateGame extends AppCompatActivity {
             this.setOrientation(LinearLayout.HORIZONTAL);
 
             this.playerNameEditText = new EditText(context);
+
+            this.playerNameEditText.setSingleLine(true);
+            this.playerNameEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 
             if (playerName == null || playerName.isEmpty()) {
                 // add player hint to each input
