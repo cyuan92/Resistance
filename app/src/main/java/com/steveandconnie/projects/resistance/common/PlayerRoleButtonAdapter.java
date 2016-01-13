@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ToggleButton;
 
-import com.steveandconnie.projects.resistance.common.Player;
-
 import java.util.List;
 
 /**
@@ -54,6 +52,9 @@ public class PlayerRoleButtonAdapter extends BaseAdapter {
             playerRoleBtn.setText(player.getPlayerName());
             playerRoleBtn.setTextOff(player.getPlayerName());
             playerRoleBtn.setTextOn(player.getPlayerRole().toString());
+
+//            playerRoleBtn.setBackgroundTintList(context.getResources().getColorStateList(R.color.reveal_roles_colorstatelist, null));
+
             playerRoleBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -76,7 +77,7 @@ public class PlayerRoleButtonAdapter extends BaseAdapter {
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
             int width = metrics.widthPixels / 4;
             playerRoleBtn.setWidth(width);
-            playerRoleBtn.setHeight(width);
+            playerRoleBtn.setHeight((int) (1.3 * width));
         } else {
             playerRoleBtn = (ToggleButton) convertView;
         }
