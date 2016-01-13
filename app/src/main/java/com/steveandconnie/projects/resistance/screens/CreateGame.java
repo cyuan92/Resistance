@@ -83,10 +83,6 @@ public class CreateGame extends AppCompatActivity {
     }
 
     public void onClickStartBtn(View view) {
-        //start game logic. grab game name
-        EditText gameNameText = (EditText)findViewById(R.id.gameName);
-        String gameName = gameNameText.getText().toString();
-
         // grab player names and put them in a list
         ViewGroup playerGroup = (ViewGroup)findViewById(R.id.playerNamesGroup);
         List<String> playerNames = new ArrayList<String>();
@@ -102,10 +98,10 @@ public class CreateGame extends AppCompatActivity {
         }
 
         // run start game logic
-        startGame(gameName, playerNames);
+        startGame(playerNames);
     }
 
-    private void startGame(String gameName, List<String> playerNames) {
+    private void startGame(List<String> playerNames) {
         if (numPlayers < MIN_NUM_PLAYERS || numPlayers > MAX_NUM_PLAYERS) {
             // check valid number of players
             String title = this.getString(R.string.alert_title);

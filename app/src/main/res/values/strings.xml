@@ -2,7 +2,7 @@
     <string name="app_name">Resistance</string>
 
     <!-- screen 1-->
-    <string name="step_one_activity_title">Step 1: Create a game</string>
+    <string name="step_one_activity_title">Step 1: Setup a game</string>
     <string name="game_name_hint">Game name</string>
     <string name="player_hint">Player</string>
     <string name="remove_btn_name">Remove</string>
