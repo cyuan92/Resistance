@@ -3,9 +3,7 @@ package com.steveandconnie.projects.resistance.screens;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +18,6 @@ public class MissionResult extends AppCompatActivity {
 
     Resistance resistanceGame;
     boolean missionFailed;
-    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,39 +27,17 @@ public class MissionResult extends AppCompatActivity {
         Intent intent = getIntent();
         resistanceGame = (Resistance) intent.getParcelableExtra("resistanceGame");
 
+        // update the view's text to display whether the mission passed or failed
         missionFailed = intent.getBooleanExtra("missionFailed", false);
         final TextView text = (TextView) findViewById(R.id.missionResultText);
+        if (missionFailed) {
+            text.setText("FAILED!");
+        } else {
+            text.setText("PASSED!");
+        }
 
-        // hide these views until countdown completes
+        // run end game logic if the game is over
         final Button btn = (Button) findViewById(R.id.goToNextMissionBtn);
-        btn.setVisibility(View.INVISIBLE);
-        final View frag = (View) findViewById(R.id.missionHistoryFragmentContainer);
-        frag.setVisibility(View.INVISIBLE);
-
-        // countdown to reveal results
-        // TODO: 1) change the timing of the beats, or 2) use a different sound
-        mp = MediaPlayer.create(this, R.raw.heartbeat);
-        mp.start();
-        new CountDownTimer(6000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                text.setText("" + millisUntilFinished / 1000);
-                //here you can have your logic to set text to edittext
-            }
-
-            public void onFinish() {
-                if (missionFailed) {
-                    text.setText("FAILED!");
-                } else {
-                    text.setText("PASSED!");
-                }
-                btn.setVisibility(View.VISIBLE);
-                frag.setVisibility(View.VISIBLE);
-            }
-
-        }.start();
-
-
         boolean isGameOver = resistanceGame.checkIfGameOver();
         if (isGameOver) {
             btn.setText("Finish game");
