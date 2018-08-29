@@ -39,7 +39,7 @@
     <!-- screen 5 -->
     <string name="title_activity_mission_result">Mission result</string>
     <string name="go_to_next_mission_btn">Go to next mission</string>
-    <string name="not_all_players_voted">Not all players have voted</string>
+    <string name="not_all_players_voted">These players have not voted: %s</string>
 
     <!-- screen 6 -->
     <string name="title_activity_finish_game">Game over!</string>

@@ -24,6 +24,8 @@ import com.steveandconnie.projects.resistance.common.Role;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//import org.apache.commons.collections4.CollectionUtils;
+
 public class LaunchMission extends AppCompatActivity {
 
     private ArrayList<Player> selectedPlayerList;
@@ -115,7 +117,16 @@ public class LaunchMission extends AppCompatActivity {
         if (playerToVoteMap.keySet().size() < selectedPlayerList.size()) {
             // display error message and try again
             String title = this.getString(R.string.alert_title);
-            String message = this.getString(R.string.not_all_players_voted);
+            //Collection notVoted = CollectionUtils.subtract(selectedPlayerList,playerToVoteMap.keySet());
+
+            ArrayList<String> notVoted = new ArrayList<String>();
+            for (Player player : selectedPlayerList) {
+                if (!playerToVoteMap.containsKey(player)) {
+                    notVoted.add(player.getPlayerName());
+                }
+            }
+
+            String message = this.getString(R.string.not_all_players_voted, android.text.TextUtils.join(", ", notVoted));
             String positiveBtnMessage = this.getString(R.string.alert_okay);
             GameUtils.displayAlertMessage(this, title, message, positiveBtnMessage);
             return;
